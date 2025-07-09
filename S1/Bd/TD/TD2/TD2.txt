@@ -1,0 +1,24 @@
+CREATE TABLE avion (
+    na INT PRIMARY KEY,
+    nom VARCHAR(12),
+    capacite INT,
+    localite VARCHAR(10)
+);
+
+CREATE TABLE pilote (
+    np INT PRIMARY KEY,
+    nom VARCHAR(25),
+    adresse VARCHAR(40)
+);
+
+CREATE TABLE vol (
+    nv VARCHAR(6) PRIMARY KEY,
+    np INT, 
+    na INT, 
+    vd VARCHAR(10),
+    va VARCHAR(10),
+    hd TIME,
+    ha TIME,
+    FOREIGN KEY (np) REFERENCES pilote(np),
+    FOREIGN KEY (na) REFERENCES avion(na)
+);

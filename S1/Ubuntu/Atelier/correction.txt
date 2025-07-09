@@ -1,0 +1,75 @@
+#============== Exerice 1 : extraction d'un bloc de texte ============================
+if test $# -ne 3
+then
+echo "Nombre d'arguments incorrect"
+echo "Usage: sh $0  nom_fichier borne_inf  borne_sup "
+exit 2
+fi
+
+if test -f $1
+ then
+ nbl=`wc -l <$1`
+ if [ $2 -gt $3 ]
+ then
+  echo "Le borne inf doit doit être inférieur à borne sup"
+  exit 1
+ fi
+ if  [ $2 -le $nbl -a  $3 -le $nbl ]
+ then 
+  head -$3 $1 |tail -n  +$2
+  exit 0
+ else
+ echo "Borne_inf et borne_sup ne doivent pas depasser la taille maximale du fichier"
+ exit 5
+ fi
+else
+echo " $1 n'existe pas ou il ne s'agit pas d'un fichier ordinaire"
+exit 3
+fi
+#================= Exerice2 : Tuer un processus  ============================
+for i in `ps -ef |grep ^$1|grep bash$|tr -s " "  |cut -f 2 -d" "`
+do
+kill -9 $i
+done 
+#================= Exerice3 : Fermer la sesion d'un utilisateur ===============
+if [ $# -ne 1 ]
+then
+echo "Attentipon nombre d'argument incorrect"
+exit 1
+fi
+
+for i in `ps -ef|grep $1$|tr -s " "  |cut -f 2 -d" "`
+do
+kill -9 $i
+done 
+exit 0
+
+#================= Exerice4 : Afficher un fichier  texte en inverse ============
+
+nbl=`wc -l <$1`
+i=$nbl
+while test $i -ge 1
+do
+head -$i $1|tail -1
+#i=$(($i-1))
+i=`expr $i - 1`
+done
+#============= Exerice 5 : création de des comptes par lot ======================
+if test -f $2
+then
+ r=`grep -c ^$1 /etc/group`
+ if test $r -eq 0
+  then
+  groupadd $1
+ fi
+ 
+ for i in `cat $2`
+ do
+ useradd -g $1 $i
+ done
+  
+
+exit 0
+fi
+echo "Le fichier des nom n'existe pas"
+exit 2
