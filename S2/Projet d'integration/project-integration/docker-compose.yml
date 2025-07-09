@@ -1,0 +1,42 @@
+version: '3.9'
+
+services:
+  router:
+    image: frrouting/frr
+    container_name: router
+    privileged: true
+    networks:
+      net1:
+        ipv4_address: 192.168.1.1
+    command: sleep infinity
+
+  switch:
+    image: socketplane/openvswitch
+    container_name: switch
+    privileged: true
+    networks:
+      net1:
+    command: sleep infinity
+
+  server:
+    image: ubuntu
+    container_name: server
+    networks:
+      net1:
+        ipv4_address: 192.168.1.100
+    command: sleep infinity
+
+  client:
+    image: alpine
+    container_name: client
+    networks:
+      net1:
+        ipv4_address: 192.168.1.101
+    command: sleep infinity
+
+networks:
+  net1:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 192.168.1.0/24

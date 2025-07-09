@@ -1,0 +1,7 @@
+7d2b0abf82681cc71207ff121c9f8d7c
+
+
+1/ https://api.openweathermap.org/data/2.5/weather?q=Tunis&appid=7d2b0abf82681cc71207ff121c9f8d7c
+2/ https://api.openweathermap.org/data/2.5/weather?id=2464470&appid=7d2b0abf82681cc71207ff121c9f8d7c
+3/ https://api.openweathermap.org/data/2.5/forecast?q=tunis&appid=7d2b0abf82681cc71207ff121c9f8d7c
+4/ https://api.openweathermap.org/data/2.5/weather?lat=38.8065&lon=10.1815&appid=7d2b0abf82681cc71207ff121c9f8d7c

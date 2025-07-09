@@ -1,0 +1,22 @@
+1/créer un utilisateur RSI21 tablespace par defaut :TBL01 quota 10M sur TBL01 quota 5M sur TBL02 RSI21 doit obligatoirement changer son mot de passe lors de sa premier connection
+
+create user RSI21 identified by user123
+	default tablespace TBL01
+	quota 10M on TBL01
+	quota 5M on TBL02;
+
+alter user RSI21 password expire;
+
+2/attribuer les privileges create session, create table, create view a RSI21 select ,insert, update sur la table article de l'utilisateur stock a lutilisateur RSI21
+
+grant create table, session, view to RSI21
+grant select, insert, update on stock.article to RSI21
+
+3/comment l'administrateur peut afficher tous les privileges de RSI21
+
+select * from DBA_SYS_PRIVS where grantee = 'RSI21';
+select * from DBA_TAB_PRIVS where grantee = 'RSI21';
+select * from DBA_COL_PRIVS where grantee = 'RSI21';
+
+
+

@@ -1,0 +1,21 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+VAGRANTFILE_API_VERSION = "2"
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+
+  config.vm.define "database" do |db|
+    db.vm.box = "ubuntu/trusty64"
+    db.vm.hostname = "db01"
+    db.vm.network "private_network", ip: "192.168.55.100"
+  end
+
+  config.vm.define "web" do |web|
+    web.vm.box = "ubuntu/trusty64"
+    web.vm.hostname = "web01"
+    web.vm.network "private_network", ip: "192.168.55.101"
+    
+    web.vm.provision "shell",
+      inline: "echo -e '127.0.0.1 localhost web01\n192.168.55.100 db01' >> /etc/hosts"
+  end
+
+end

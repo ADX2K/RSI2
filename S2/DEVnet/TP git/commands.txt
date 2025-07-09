@@ -1,0 +1,16 @@
+devasc@labvm:~$ git config --global user.name "SampleUser"
+devasc@labvm:~$ git config --global user.email sample@example.com
+devasc@labvm:~$ git config --list
+git init 
+git status
+git add .
+git commit -m "Committing DEVASC.txt
+git log
+git diff b510f8e 9f5c4c5
+git branch feature ==> git branch
+git checkout feature
+git merge feature ==> git show
+git branch -d feature (delete)
+git remote add origin https://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@github.com/ADX2K/devasc-study-team.git
+git remote -v
+git push origin master 

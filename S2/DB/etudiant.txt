@@ -1,0 +1,50 @@
+create table etudiant(
+num_inscrit int,
+nom varchar(20),
+prenom varchar(20),
+date_naissance date,
+classe varchar(20),
+PRIMARY KEY (num_inscrit));
+
+
+create table matieres(
+code_mat int,
+designation varchar(20),
+Coeff float,
+vol_horraire float,
+PRIMARY KEY (code_mat));
+
+create table notes(
+num_inscrit int,
+code_mat int,
+moy float,
+foreign key (num_inscrit) references etudiant(num_inscrit),
+foreign key (code_mat) references matieres(code_mat)
+);
+
+alter table notes add PRIMARY KEY(code_mat,num_inscrit);
+alter table notes modify moy number;
+
+
+insert into etudiant values(1,'adel','aiouaz',to_date('06-08-2004','dd-mm-yyyy'),'RSI21');
+insert into etudiant values(2,'amin','touhemi',to_date('09-11-2004','dd-mm-yyyy'),'RSI21');
+insert into etudiant values(3,'lotfi','ben ali',to_date('11-11-2004','dd-mm-yyyy'),'RSI21');
+insert into etudiant values(4,'anis','sallemi',to_date('09-12-2005','dd-mm-yyyy'),'RSI21');
+insert into etudiant values(5,'aziz','chenhi',to_date('19-01-2003','dd-mm-yyyy'),'RSI21');
+
+
+insert into matieres values(1,'Reseau',2.5,6);
+insert into matieres values(2,'Algo',1.5,4);
+
+insert into notes values(1,1,12);
+insert into notes values(1,2,17);
+insert into notes values(2,1,16);
+insert into notes values(2,2,18.25);
+insert into notes values(3,1,15.75);
+insert into notes values(3,2,14);
+insert into notes values(4,1,9);
+insert into notes values(4,2,7.92);
+insert into notes values(5,1,10);
+insert into notes values(5,2,11.5);
+
+

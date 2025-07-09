@@ -1,0 +1,113 @@
+List books
+
+import requests
+
+url = "http://library.demo.local/api/v1/books"
+
+response = requests.get(url)
+print(response.status_code)
+print(response.json())
+
+OR 
+curl -X GET "http://library.demo.local/api/v1/books" -H "accept: application/json"
+
+
+Get a token
+
+from requests.auth import HTTPBasicAuth
+
+url = "http://library.demo.local/api/v1/loginViaBasic"
+
+response = requests.post(url, auth=HTTPBasicAuth('cisco', 'Cisco123!'))
+print(response.status_code)
+print(response.json())
+
+
+OR
+curl -X POST "http://library.demo.local/api/v1/loginViaBasic" -u "cisco:Cisco123!"
+
+
+Add a book
+
+import requests
+
+url = "http://library.demo.local/api/v1/books"
+
+headers = {
+    "accept": "application/json",
+    "X-API-KEY": "cisco|YOURTOKENHERE",
+    "Content-Type": "application/json"
+}
+
+payload = {
+    "id": 4,
+    "title": "IPv6 Fundamentals",
+    "author": "Rick Graziani",
+    "isbn": "978 1587144778"
+}
+
+response = requests.post(url, headers=headers, json=payload)
+print(response.status_code)
+print(response.json())
+
+
+OR
+curl -X POST "http://library.demo.local/api/v1/books" \
+-H "accept: application/json" \
+-H "X-API-KEY: cisco|YOURTOKENHERE" \
+-H "Content-Type: application/json" \
+-d '{"id":4,"title":"IPv6 Fundamentals","author":"Rick Graziani","isbn":"978 1587144778"}'
+
+
+List specific book by ID
+
+url = "http://library.demo.local/api/v1/books/4"
+
+headers = {
+    "accept": "application/json",
+    "X-API-KEY": "cisco|YOURTOKENHERE"
+}
+
+response = requests.get(url, headers=headers)
+print(response.status_code)
+print(response.json())
+
+
+OR
+curl -X GET "http://library.demo.local/api/v1/books/4" \
+-H "accept: application/json" \
+-H "X-API-KEY: cisco|YOURTOKENHERE"
+
+
+Delete a book
+
+url = "http://library.demo.local/api/v1/books/4"
+
+headers = {
+    "accept": "application/json",
+    "X-API-KEY": "cisco|YOURTOKENHERE"
+}
+
+response = requests.delete(url, headers=headers)
+print(response.status_code)
+print(response.json())
+
+
+OR
+curl -X DELETE "http://library.demo.local/api/v1/books/4" \
+-H "accept: application/json" \
+-H "X-API-KEY: cisco|YOURTOKENHERE"
+
+
+
+
+
+
+
+
+curl -X PATCH "http://library.demo.local/api/v1/books/4" \
+-H "accept: application/json" \
+-H "X-API-KEY: cisco|MTdYFOHii3xua8eWiOJxCyOTccgHRiB_7P05KDOCE6A" \
+-H "Content-Type: application/json" \
+-d '{"author":"Updated Author"}'
+
